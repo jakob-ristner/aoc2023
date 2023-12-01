@@ -1,0 +1,89 @@
+use regex::{Match, Regex};
+
+static nums = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+
+
+fn main() {
+    let out = part2();
+    println!("{:?}", out);
+}
+
+fn part2() -> u32 {
+    let content = include_str!("../input.txt");
+    let mut out = Vec::new();
+    let re = Regex::new(r"one|two|three|four|five|six|seven|eight|nine|\d").unwrap();
+    let rerev = Regex::new(r"eno|owt|eerht|ruof|evif|xis|neves|thgie|enin|\d").unwrap();
+    for line in content.lines() {
+        let mat = re.find(line).unwrap();
+        let first = word_to_int(mat.as_str());
+
+        let rev: String = line.chars().into_iter().rev().collect();
+        let mat = rerev.find(&rev).unwrap();
+        let last = word_to_int_rev(mat.as_str());
+
+        //println!("{}, {:?}", line, (first, last));
+        out.push(first * 10 + last);
+    }
+    out.iter().sum()
+}
+
+fn solve() -> u32 {
+    let content = include_str!("../input.txt");
+    for line in content.lines() {
+        let mut curr: String = line.to_owned();
+        for (i, text) in nums.iter().enumerate() {
+            curr = curr.replace(text, &(i + 1).to_string())
+        }
+    }
+    todo!();
+}
+
+fn calc_line(line: String) -> u32 {
+    
+    todo!();
+}
+
+fn word_to_int_rev(word: &str) -> u32 {
+    if let Ok(num) = word.parse() {
+        return num;
+    }
+
+    match word {
+        "eno" => 1,
+        "owt" => 2,
+        "eerht" => 3,
+        "ruof" => 4,
+        "evif" => 5,
+        "xis" => 6,
+        "neves" => 7,
+        "thgie" => 8,
+        "enin" => 9,
+        _ => {
+            println!("{}", word);
+            panic!("not a number");
+        }
+    }
+}
+
+fn word_to_int(word: &str) -> u32 {
+    if let Ok(num) = word.parse() {
+        return num;
+    }
+
+    match word {
+        "one" => 1,
+        "two" => 2,
+        "three" => 3,
+        "four" => 4,
+        "five" => 5,
+        "six" => 6,
+        "seven" => 7,
+        "eight" => 8,
+        "nine" => 9,
+        _ => panic!("not number"),
+        _ => {
+            println!("{}", word);
+            panic!("not a number");
+        }
+    }
+}
