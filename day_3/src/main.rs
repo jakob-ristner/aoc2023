@@ -19,11 +19,8 @@ fn part_2(matrix: &Vec<Vec<char>>) -> u32 {
 
     for number_pos in &row_start_end {
         if let Some((pos, num)) = gear(matrix, number_pos) {
-            if let Some(list) = gear_numbers.get_mut(&pos) {
-                list.push(num);
-            } else {
-                gear_numbers.insert(pos, vec![num]);
-            }
+            let arr = gear_numbers.entry(pos).or_insert(vec![]);
+            arr.push(num);
         }
     }
 
