@@ -44,7 +44,7 @@ fn part_1(matrix: &Vec<Vec<char>>) -> u32 {
 }
 
 fn parse() -> Vec<Vec<char>> {
-    let lines = include_str!("../input.txt").lines();
+    let lines = include_str!("../input_day3.txt").lines();
     let matrix: Vec<Vec<char>> = lines.map(|x| x.chars().collect::<Vec<char>>()).collect();
     matrix
 }
