@@ -1,11 +1,4 @@
-use std::collections::HashMap;
-
-pub static TO_WEST: [char; 3] = ['-', 'F', 'L'];
-pub static TO_EAST: [char; 3] = ['-', '7', 'J'];
-pub static TO_NORTH: [char; 3] = ['|', 'F', '7'];
-pub static TO_SOUTH: [char; 3] = ['|', 'J', 'L'];
-pub type Pos = (i32, i32);
-pub type Map = HashMap<Pos, char>;
+use super::*;
 
 pub fn get_next(map: &Map, &(row, col): &Pos, &(pr, pc): &Pos) -> Pos {
     let curr_ch = map.get(&(row, col)).unwrap();
